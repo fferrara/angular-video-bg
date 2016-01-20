@@ -8,7 +8,7 @@
      * any container on your site.
      */
 
-    angular.module('angularVideoBg', []);
+    angular.module('angularVideoBgCss', []);
 
     /**
      * @ngdoc directive
@@ -18,7 +18,7 @@
      * of the video background.
      * @element <video-bg video-id="videoId" ratio="ratio" loop="loop" mute="mute" start="start" content-z-index="contentZIndex" allow-click-events="allowClickEvents"></video-bg>
      */
-    angular.module('angularVideoBg').directive('videoBg', videoBg);
+    angular.module('angularVideoBgCss').directive('videoBg', videoBg);
 
     // this obviates using ngAnnotate in the build task
     videoBg.$inject = ['$window', '$q', '$timeout'];
@@ -52,7 +52,6 @@
                     parentDimensions,
                     playerDimensions,
                     playerCallback = scope.playerCallback,
-                    backgroundImage = scope.mobileImage || '//img.youtube.com/vi/' + scope.videoId + '/maxresdefault.jpg',
                     videoArr,
                     videoTimeout;
 
@@ -394,8 +393,6 @@
                     if (evt.data === YT.PlayerState.UNSTARTED && scope.playlist) {
                         var videoObj = scope.playlist[player.getPlaylistIndex()],
                             videoMute = videoObj.mute === undefined ? scope.mute : videoObj.mute;
-                        backgroundImage = videoObj.mobileImage || scope.mobileImage || '//img.youtube.com/vi/' + videoObj.videoId + '/maxresdefault.jpg';
-                        setBackgroundImage(backgroundImage);
                         $player.css('display', 'none');
                         seekToStart(videoObj);
                         if (videoMute || (videoMute && scope.mute)) {
@@ -443,20 +440,10 @@
                     resizeAndPositionPlayer();
                 }
 
-                function setBackgroundImage(img) {
-                    element.parent().css({
-                        backgroundImage: 'url(' + img + ')',
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center center'
-                    });
-                }
-
                 var windowResized = debounce(function() {
                     updateDimensions();
                     resizeAndPositionPlayer();
                 }, 300);
-
-                setBackgroundImage(backgroundImage);
 
                 /**
                  * if it's not mobile or tablet then initialize video
@@ -501,8 +488,6 @@
                 scope.$watch('videoId', function(current, old) {
                     if (current && old && current !== old) {
                         clearTimeout(videoTimeout);
-                        backgroundImage = scope.mobileImage || '//img.youtube.com/vi/' + current + '/maxresdefault.jpg';
-                        setBackgroundImage(backgroundImage);
                         $player.css('display', 'none');
                         player.loadVideoById(current);
                     }

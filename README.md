@@ -1,4 +1,10 @@
-# angular-video-bg
+# angular-video-bg-css
+
+##IMPORTANT:
+
+This is essentially identical to [angular-video-bg](https://github.com/kanzelm3/angular-video-bg).
+The only modification consists in not setting the fallback background image inline. This allows to use CSS for a
+more flexible handling.
 
 angular-video-bg is an [Angular.js](http://angularjs.org/) YouTube video background player directive. It stresses simplicity and performance.
 

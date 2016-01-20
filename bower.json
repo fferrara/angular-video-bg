@@ -1,10 +1,10 @@
 {
   "author": {
-    "name": "https://github.com/kanzelm3"
+    "name": "https://github.com/fferrara"
   },
-  "name": "angular-video-bg",
+  "name": "angular-video-bg-css",
   "version": "0.3.3",
-  "main": "angular-video-bg.min.js",
+  "main": "angular-video-bg-css.min.js",
   "ignore": [
     "**/.*",
     "node_modules",
